@@ -5,13 +5,17 @@ const mongoose = require('mongoose');
 let server;
 
 describe('/v1/emails', () => {
+    
     beforeEach(() => {
         server = require('../../index');
     });
+
     afterEach(async () => {
         await server.close();
         await Email.deleteMany({});
     });
+
+    afterAll(() => mongoose.connection.close());
 
     describe('POST /', () => {
 
